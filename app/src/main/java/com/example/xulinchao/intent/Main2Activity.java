@@ -7,8 +7,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+
+import java.sql.BatchUpdateException;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -19,9 +23,22 @@ public class Main2Activity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         EditText show=(EditText) findViewById(R.id.show);
+        Log.e("xlc","Main2Activity PID"+getTaskId());
 //        ComponentName componentName=getIntent().getComponent();
         show.setText("组件包名 :"+getIntent().getAction()+"\n"
         +"组件类名 :"+getIntent().getCategories());
+        ((Button)findViewById(R.id.start)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(){
+                    {
+                        setAction(MainActivity.XLC_ACTION);
+                        addCategory("xlc");
+                    }
+                });
+            }
+        });
+
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
